@@ -7,8 +7,8 @@ public class MillspaughOwenAssignment8 {
 		public static void main(String[] args) {
 			
 			//Create 3 Arrays named courses, grades, and credits with assigned values
-			String[] courses = {"CS 1150", "Math", "Physics", "Chemistry", "English"};	
-			String[] grades = {"A", "C+", "A-", "B", "3"};	
+			String[] courses = {"CS1150", "Math", "Physics", "Chemistry", "English"};	
+			String[] grades = {"A", "C+", "A-", "B", "C-"};	
 			int[] credits = {3, 3, 4, 3, 3};
 			
 			
@@ -20,17 +20,19 @@ public class MillspaughOwenAssignment8 {
 			System.out.println("Total Credit Hours: " + sumofCredits);
 			
 			
-			double totalGradePoints = computeTotalGradePoints();
-			System.out.println("Total Grade Points: " + totalGradePoints);
+			double totalGradePoints = computeTotalGradePoints(grades, credits);
+			System.out.printf("Total Grade Points: %4.2f\n", totalGradePoints);
 			
 			
-			double overallGPA = computeOverallGPA(totalGradePoints);
-			System.out.println("Overall GPA: " + overallGPA);
+			float overallGPA = (float)totalGradePoints / sumofCredits;
+			System.out.printf("Overall GPA: %4.2f\n", overallGPA);
+		
 			
+			int gradeWorthMostPoints = findGradeWorthMostPoints(courses, credits);
+			String classandGrade = courses[gradeWorthMostPoints] + " " + grades[gradeWorthMostPoints];
 			
-			String gradeWorthMostPoints = findGradeWorthMostPoints(courses, grades);
 			System.out.println("");
-			System.out.println("Grade Worth Most Points: " + gradeWorthMostPoints);
+			System.out.println("Grade Worth Most Points: " + classandGrade);
 			
 		}
 		
@@ -55,11 +57,10 @@ public class MillspaughOwenAssignment8 {
 			return sumofCredits;
 		} 
 	
-		public static double convertLetterGradeToPoints(String grades) {
+		public static double convertLetterGradeToPoints(String grade) {
 		    double convertedLetterGrade = 0.0;
-
-		    for (int i = 0; i < 5; i++) {
-		        String letterGrade = grades[i];
+		    String letterGrade = grade;
+		        
 		        if (letterGrade.equals("A")) {
 		            convertedLetterGrade = 4.0;
 		        } else if (letterGrade.equals("A-")) {
@@ -85,44 +86,49 @@ public class MillspaughOwenAssignment8 {
 		        } else if (letterGrade.equals("F")) {
 		            convertedLetterGrade = 0.0;
 		        }
-		    }
 
 		    return convertedLetterGrade;
 		}
 
 		
 		public static double computeTotalGradePoints(String[] grades, int[] credits) {
-			double totalGradePoints = 0.0;
-			double convertedGrade = 0.0;
-			
-			
-			
-			
-			return totalGradePoints;
-			
+		    double totalGradePoints = 0.0;
+
+		    for (int i = 0; i < grades.length; i++) {
+		        String grade = grades[i]; // Get the grade for the current course
+		        double convertedGrade = convertLetterGradeToPoints(grade);
+		        int credit = credits[i]; // Get the credit value for the current course
+		        totalGradePoints += convertedGrade * credit; // Calculate grade points for the course and add to the total
+		    }
+
+		    return totalGradePoints;
 		}
+
 		
-		public static double computeOverallGPA(double totalGradePoints) {
-			double overallGPA = totalGradePoints / 5;
-			return overallGPA;
-		}
-		
-		public static String findGradeWorthMostPoints(String[] courses, String[] grades){
-			String gradeWorthMostPoints = "Physics: A-";
-			char mostValuableGrade = 'F';
-			char checkGradeValue = 'F';
+		public static int findGradeWorthMostPoints(String[] grades, int[] credits){
+			int gradeWorthMostPoints = 0; 
+			double worthCalcs = 0.0;
+			String grade = "";
+			double gradePointValue = 0.0;
+			double highestValue = worthCalcs;
+			int credit = 0;
 			
-			for(int i = 0; i < 5; i++) {
-				checkGradeValue = grades[i].charAt(0); 
-					
-					
-				if(mostValuableGrade < checkGradeValue) {
-					mostValuableGrade = checkGradeValue;
-					gradeWorthMostPoints = courses[i] + mostValuableGrade;
+			for (int i = 0; i < grades.length; i++) {
+				grade = grades[i];
+				credit = credits[i];
+				System.out.println("Grade Level: " + grade + " Credits: " + credits);
+				gradePointValue = convertLetterGradeToPoints(grade); 
+				System.out.println(gradePointValue);
+				worthCalcs = gradePointValue * credit;
+				
+				/*if(worthCalcs > highestValue) {
+						highestValue = worthCalcs;
+						gradeWorthMostPoints = i;
 				}
+				System.out.println(worthCalcs + " " + highestValue);
+				*/
+				
 			}
-			
-			
 			return gradeWorthMostPoints;
 		}
 
