@@ -1,5 +1,3 @@
-
-
 public class MillspaughOwenAssignment8 {
 
 	
@@ -8,13 +6,13 @@ public class MillspaughOwenAssignment8 {
 			
 			//Create 3 Arrays named courses, grades, and credits with assigned values
 			String[] courses = {"CS1150", "Math", "Physics", "Chemistry", "English"};	
-			String[] grades = {"A", "C+", "A-", "B", "C-"};	
+			String[] grades = {"A", "C+", "A-", "B", "D"};	
 			int[] credits = {3, 3, 4, 3, 3};
-			
 			
 				
 			display(courses, grades, credits);
 			System.out.println("");
+			
 			
 			int sumofCredits = computeSumOfCredits(credits);
 			System.out.println("Total Credit Hours: " + sumofCredits);
@@ -26,8 +24,6 @@ public class MillspaughOwenAssignment8 {
 			
 			float overallGPA = (float)totalGradePoints / sumofCredits;
 			System.out.printf("Overall GPA: %4.2f\n", overallGPA);
-			System.out.println("");
-			System.out.println("---------------------------------");
 
 			
 			int gradeWorthMostPoints = findGradeWorthMostPoints(grades, credits);
@@ -35,7 +31,30 @@ public class MillspaughOwenAssignment8 {
 			
 			System.out.println("");
 			System.out.println("Grade Worth Most Points: " + classandGrade);
+			System.out.println("---------------------------------");
+
+			Dog[] dogArray = new Dog[5];
 			
+			Dog dog0 = new Dog("Rover", "woof woof woof");
+			Dog dog1 = new Dog("Max", "arf arf arf");
+			Dog dog2 = new Dog("Tiny", "yap yap yap");
+			Dog dog3 = new Dog("Trooper", "ruff ruff ruff");
+			Dog dog4 = new Dog("Magoo", "bow wow bow wow");
+			
+				dogArray[0] = dog0;
+				dogArray[1] = dog1;
+				dogArray[2] = dog2;
+				dogArray[3] = dog3;
+				dogArray[4] = dog4;
+				
+			System.out.println("");
+			System.out.println("");
+			System.out.println("Making the dogs bark!");
+			System.out.println("---------------------------------");
+			makeDogsBark(dogArray);
+			
+			
+		
 		}
 		
 		public static void display(String[] courses, String[] grades, int[] credits){
@@ -135,15 +154,14 @@ public class MillspaughOwenAssignment8 {
 		    return gradeWorthMostPoints;
 		}
 
+		public static void makeDogsBark(Dog[] dogArray) {
+			for(int i = 0; i < dogArray.length; i++) {
+				System.out.println(dogArray[i].getName() + " barks like this: " + dogArray[i].getBark());
+			}
+		} 
 
 }
-
-		/** 
-
-}
-public static void makeDogsBark(Dog[] dogArray) {
-	
-} 
+		 
 
 class Dog {							
 private String name;					
@@ -172,4 +190,3 @@ public void setBark(String bark) {
    this.bark = bark;
 }
 } // Dog
-**/
