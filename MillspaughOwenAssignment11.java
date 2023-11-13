@@ -14,12 +14,14 @@ public class MillspaughOwenAssignment11 {
 
     public static void main(String[] args) {
         // Your main program logic goes here
+    	Car car0 = new Car("Donkey", "Toyota Tundra",15,34000,8);
     }
 
     // Create the cars for the simulation based on the assignment sheet table and
     // fills the incoming array with the cars
     public static void createCars(Car[] cars) {
-        // Implementation for creating cars
+    	
+
     }
 
     // Print the details for each car in the array. Display the car’s owner,
@@ -65,7 +67,15 @@ class Car {
     private FuelGauge fuelGauge;
     private Odometer odometer;
 
-    // Add constructor, getters, and setters as needed
+    public Car(String owner, String model, int mpg, FuelGauge fuelGauge, Odometer odometer) {
+		this.owner = owner;
+		this.model = model;
+		this.mpg = mpg;
+		this.fuelGauge = fuelGauge;
+		this.odometer = odometer;
+	}
+
+	// Add constructor, getters, and setters as needed
 
     public String getOwner() {
         return owner;
@@ -88,15 +98,17 @@ class FuelGauge {
     // Details for the fuel gauge class go here
     private int gallons;
 
-    // Add constructor, getters, and setters as needed
-
     public int getGallons() {
         return gallons;
     }
 }
 
 class Odometer {
-    // Details for the odometer class go here
-    // Add necessary attributes, constructor, getters, and setters
+	private int odometer;
+	
+	public int getOdometer() {
+		return odometer;
+	}
+    
 }
 
