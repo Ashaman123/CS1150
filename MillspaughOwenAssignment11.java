@@ -35,7 +35,20 @@ public class MillspaughOwenAssignment11 {
     // return true, otherwise return false
     public static boolean checkFuelLevels(Car[] cars) {
         // Implementation for checking fuel levels
-        return false;
+    	int fuelCheck = 0;
+    	int fuelRequired = 0;
+    	
+    	for(int i = 0; i < cars.length; i++) {
+    		fuelRequired = cars[i].getMpg();
+    		fuelCheck = cars[i].getFuelGauge();
+    	}
+    	
+    	if(fuelCheck < fuelRequired) {
+    		return false
+    	}
+    	else {
+    		return true
+    	}
     }
 
     // Print the details for each car in the cars array to a file
