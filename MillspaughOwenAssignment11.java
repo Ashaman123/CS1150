@@ -24,24 +24,24 @@ public class MillspaughOwenAssignment11 {
     public static void createCars(Car[] cars) {
     	    // Car 0
     	    cars[0] = new Car("Donkey", "Toyota Tundra", 15, new FuelGauge(), new Odometer());
-    	    cars[0].getOdometer().setOdometer(34000); // Set odometer value
-    	    cars[0].getFuelGauge().setGallons(8); // Set fuel gauge value
+    	    cars[0].getOdometer().setOdometer(34000); 
+    	    cars[0].getFuelGauge().setGallons(8); 
     	    // Car 1
     	    cars[1] = new Car("Fiona", "Audi Q7", 21, new FuelGauge(), new Odometer());
-    	    cars[1].getOdometer().setOdometer(7110); // Set odometer value
-    	    cars[1].getFuelGauge().setGallons(10); // Set fuel gauge value
+    	    cars[1].getOdometer().setOdometer(7110);
+    	    cars[1].getFuelGauge().setGallons(10); 
     	    // Car 2
     	    cars[2] = new Car("Shrek", "Jeep CJ5", 14, new FuelGauge(), new Odometer());
-    	    cars[2].getOdometer().setOdometer(11800); // Set odometer value
-    	    cars[2].getFuelGauge().setGallons(5); // Set fuel gauge value
+    	    cars[2].getOdometer().setOdometer(11800);
+    	    cars[2].getFuelGauge().setGallons(5); 
     	    // Car 3
     	    cars[3] = new Car("Farquaad", "Smart Car", 42, new FuelGauge(), new Odometer());
-    	    cars[3].getOdometer().setOdometer(82700); // Set odometer value
-    	    cars[3].getFuelGauge().setGallons(4); // Set fuel gauge value
+    	    cars[3].getOdometer().setOdometer(82700);
+    	    cars[3].getFuelGauge().setGallons(4); 
     	    // Car 4
     	    cars[4] = new Car("Dragon", "Chevy Suburban", 12, new FuelGauge(), new Odometer());
-    	    cars[4].getOdometer().setOdometer(150245); // Set odometer value
-    	    cars[4].getFuelGauge().setGallons(30); // Set fuel gauge value
+    	    cars[4].getOdometer().setOdometer(150245); 
+    	    cars[4].getFuelGauge().setGallons(30); 
 
     }
 
@@ -63,20 +63,31 @@ public class MillspaughOwenAssignment11 {
     // fuel level of each car in the array. If all cars have “Empty” fuel level
     // return true, otherwise return false
     public static boolean checkFuelLevels(Car[] cars) {
-        // Implementation for checking fuel levels
-    	int fuelCheck = 0;
-    	int fuelRequired = 0;
+    	FuelGauge carFuelGauge;
+    	double fuelCheck = 0.0;
+    	double carMPG = 0.0;
+    	double carFuel = 0.0;
+    	int notEmpty = 0;
+    	int empty = 0;
     	
     	for(int i = 0; i < cars.length; i++) {
-    		fuelRequired = cars[i].getMpg();
-    		//fuelCheck = cars[i].getFuelGauge();
+    		carFuelGauge = cars[i].getFuelGauge();
+    		carMPG = cars[i].getMpg();
+    		carFuel = carFuelGauge.getGallons();
+    		fuelCheck = carMPG * carFuel;
+    		if(fuelCheck % 2 == 0) {
+    			empty++;
+    		}
+    		else {
+    			notEmpty++;
+    		}
+    		
     	}
-    	
-    	if(fuelCheck < fuelRequired) {
-    		return false;
+    	if(notEmpty == 0) {
+    		return true;
     	}
     	else {
-    		return true;
+    		return false;
     	}
     }
 
