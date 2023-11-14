@@ -14,13 +14,34 @@ public class MillspaughOwenAssignment11 {
 
     public static void main(String[] args) {
         // Your main program logic goes here
-    	Car car0 = new Car("Donkey", "Toyota Tundra",15,34000,8);
-    }
+    	Car[] cars = new Car[5];
+        
+        createCars(cars);
+        printCars(cars);    }
 
     // Create the cars for the simulation based on the assignment sheet table and
     // fills the incoming array with the cars
     public static void createCars(Car[] cars) {
-    	
+    	    // Car 0
+    	    cars[0] = new Car("Donkey", "Toyota Tundra", 15, new FuelGauge(), new Odometer());
+    	    cars[0].getOdometer().setOdometer(34000); // Set odometer value
+    	    cars[0].getFuelGauge().setGallons(8); // Set fuel gauge value
+    	    // Car 1
+    	    cars[1] = new Car("Fiona", "Audi Q7", 21, new FuelGauge(), new Odometer());
+    	    cars[1].getOdometer().setOdometer(7110); // Set odometer value
+    	    cars[1].getFuelGauge().setGallons(10); // Set fuel gauge value
+    	    // Car 2
+    	    cars[2] = new Car("Shrek", "Jeep CJ5", 14, new FuelGauge(), new Odometer());
+    	    cars[2].getOdometer().setOdometer(11800); // Set odometer value
+    	    cars[2].getFuelGauge().setGallons(5); // Set fuel gauge value
+    	    // Car 3
+    	    cars[3] = new Car("Farquaad", "Smart Car", 42, new FuelGauge(), new Odometer());
+    	    cars[3].getOdometer().setOdometer(82700); // Set odometer value
+    	    cars[3].getFuelGauge().setGallons(4); // Set fuel gauge value
+    	    // Car 4
+    	    cars[4] = new Car("Dragon", "Chevy Suburban", 12, new FuelGauge(), new Odometer());
+    	    cars[4].getOdometer().setOdometer(150245); // Set odometer value
+    	    cars[4].getFuelGauge().setGallons(30); // Set fuel gauge value
 
     }
 
@@ -28,6 +49,14 @@ public class MillspaughOwenAssignment11 {
     // model, MPG, gallons, and mileage
     public static void printCars(Car[] cars) {
         // Implementation for printing car details
+    	for(int i = 0; i < cars.length; i++) {
+    		System.out.println("Owner: " + cars[i].getOwner());
+    		System.out.println("Model: " + cars[i].getModel());
+    		System.out.println("MPG: " + cars[i].getMpg());
+    		System.out.println("Gallons: " + cars[i].getFuelGauge());
+    		System.out.println("Mileage: " + cars[i].getOdometer());
+    		System.out.println("");
+    	}
     }
 
     // Returns true if all the cars are out of gas. This requires examining the
@@ -40,14 +69,14 @@ public class MillspaughOwenAssignment11 {
     	
     	for(int i = 0; i < cars.length; i++) {
     		fuelRequired = cars[i].getMpg();
-    		fuelCheck = cars[i].getFuelGauge();
+    		//fuelCheck = cars[i].getFuelGauge();
     	}
     	
     	if(fuelCheck < fuelRequired) {
-    		return false
+    		return false;
     	}
     	else {
-    		return true
+    		return true;
     	}
     }
 
@@ -88,6 +117,11 @@ class Car {
 		this.odometer = odometer;
 	}
 
+    public void setOdometer(Odometer odometerValue) {
+        this.odometer = odometerValue;
+    }
+
+
 	// Add constructor, getters, and setters as needed
 
     public String getOwner() {
@@ -105,6 +139,9 @@ class Car {
     public FuelGauge getFuelGauge() {
         return fuelGauge;
     }
+    public Odometer getOdometer() {
+    	return odometer;
+    }
 }
 
 class FuelGauge {
@@ -114,14 +151,22 @@ class FuelGauge {
     public int getGallons() {
         return gallons;
     }
+
+    public void setGallons(int gallons) {
+        this.gallons = gallons;
+    }
 }
 
+
 class Odometer {
-	private int odometer;
-	
-	public int getOdometer() {
-		return odometer;
-	}
-    
+    private int odometer;
+
+    public int getOdometer() {
+        return odometer;
+    }
+
+    public void setOdometer(int odometer) {
+        this.odometer = odometer;
+    }
 }
 
