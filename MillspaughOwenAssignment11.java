@@ -147,8 +147,7 @@ public class MillspaughOwenAssignment11 {
         while (carsStillHaveGas) {
             // Iterate through each car
             for (int i = 0; i < cars.length; i++) {
-               
-              
+            	
                     // Check if the car has gas
                     if (cars[i].getFuelGauge().getGallons() > 0) {
                         fuelGauge = cars[i].getFuelGauge();
@@ -161,7 +160,19 @@ public class MillspaughOwenAssignment11 {
                             incrementMiles(cars, i);
                         } else {
                             // Car doesn't have enough gas
-                            addCarNoGasList(cars, carsOutOfGas, i, outOfGasIndex);
+                        	 String ownerToCheck = cars[i].getOwner();
+                        	 
+                             // Check if the car is not already in the carsOutOfGas array
+                             boolean carNotInList = true;
+                             for (int j = 0; j < outOfGasIndex ; j++) {
+                                 if (carsOutOfGas[j] != null && ownerToCheck.equalsIgnoreCase(carsOutOfGas[j].getOwner())) {
+                                     carNotInList = false;
+                                 }
+                             }
+                             // If the car is not in the list, add it
+                             if (carNotInList) {
+                                 carsOutOfGas[outOfGasIndex] = cars[i];
+                             }
                             outOfGasIndex++;
                         }
                     }
@@ -187,26 +198,6 @@ public class MillspaughOwenAssignment11 {
         System.out.println("Cars at End of Simulation");
         System.out.println("------------------------------------------------------");
         printCars(cars);
-    }
-
-    public static void addCarNoGasList(Car[] cars, Car[] carsOutOfGas, int i, int outOfGasIndex) {
-        String ownerToCheck = cars[i].getOwner();
-        
-        // Check if the car is not already in the carsOutOfGas array
-        boolean carNotInList = true;
-        for (int j = 0; j < outOfGasIndex ; j++) {
-            if (carsOutOfGas[j] != null && ownerToCheck.equalsIgnoreCase(carsOutOfGas[j].getOwner())) {
-                carNotInList = false;
-                break;
-            }
-        }
-
-        // If the car is not in the list, add it
-        if (carNotInList) {
-            carsOutOfGas[outOfGasIndex] = cars[i];
-            // Reset outOfGasIndex to 0 after successfully adding a car
-            outOfGasIndex = 0;
-        }
     }
 
 
