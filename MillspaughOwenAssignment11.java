@@ -17,7 +17,10 @@ public class MillspaughOwenAssignment11 {
     	Car[] cars = new Car[5];
         
         createCars(cars);
-        printCars(cars);    }
+        printCars(cars);    
+        checkFuelLevels(cars);
+       
+    }
 
     // Create the cars for the simulation based on the assignment sheet table and
     // fills the incoming array with the cars
@@ -50,11 +53,17 @@ public class MillspaughOwenAssignment11 {
     public static void printCars(Car[] cars) {
         // Implementation for printing car details
     	for(int i = 0; i < cars.length; i++) {
+    		FuelGauge carFuelGauge = cars[i].getFuelGauge();
+            int fuelGauge = carFuelGauge.getGallons();
+            
+    		Odometer odometer = cars[i].getOdometer();
+    		int mileage = odometer.getOdometer();
+    		
     		System.out.println("Owner: " + cars[i].getOwner());
     		System.out.println("Model: " + cars[i].getModel());
     		System.out.println("MPG: " + cars[i].getMpg());
-    		System.out.println("Gallons: " + cars[i].getFuelGauge());
-    		System.out.println("Mileage: " + cars[i].getOdometer());
+    		System.out.println("Gallons: " + mileage);
+    		System.out.println("Mileage: " + fuelGauge);
     		System.out.println("");
     	}
     }
@@ -63,26 +72,20 @@ public class MillspaughOwenAssignment11 {
     // fuel level of each car in the array. If all cars have “Empty” fuel level
     // return true, otherwise return false
     public static boolean checkFuelLevels(Car[] cars) {
-    	FuelGauge carFuelGauge;
-    	double fuelCheck = 0.0;
-    	double carMPG = 0.0;
-    	double carFuel = 0.0;
-    	int notEmpty = 0;
-    	int empty = 0;
-    	
-    	for(int i = 0; i < cars.length; i++) {
-    		carFuelGauge = cars[i].getFuelGauge();
-    		carMPG = cars[i].getMpg();
-    		carFuel = carFuelGauge.getGallons();
-    		fuelCheck = carMPG * carFuel;
-    		if(fuelCheck % 2 == 0) {
-    			empty++;
-    		}
-    		else {
-    			notEmpty++;
-    		}
+        FuelGauge carFuelGauge;
+        double fuelCheck;
+        int notEmpty = 0;
+
+        for (int i = 0; i < cars.length; i++) {
+            carFuelGauge = cars[i].getFuelGauge();
+            fuelCheck = carFuelGauge.getGallons();
+
+            // Check if the fuel gauge is not empty (greater than 0)
+            if (fuelCheck > 0) {
+                notEmpty++;
+            }
+        }
     		
-    	}
     	if(notEmpty == 0) {
     		return true;
     	}
