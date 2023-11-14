@@ -52,21 +52,29 @@ public class MillspaughOwenAssignment11 {
     // model, MPG, gallons, and mileage
     public static void printCars(Car[] cars) {
         // Implementation for printing car details
-    	for(int i = 0; i < cars.length; i++) {
-    		FuelGauge carFuelGauge = cars[i].getFuelGauge();
+        System.out.println("Cars at the start of the simulation");
+        System.out.println("-------------------------------------------------------------------------");
+        System.out.printf("%-10s %-20s %-15s %-15s %-15s%n", "Owner", "Vehicle", "MPG", "Gallons", "Mileage");
+        System.out.println("-------------------------------------------------------------------------");
+        
+        for (int i = 0; i < cars.length; i++) {
+            FuelGauge carFuelGauge = cars[i].getFuelGauge();
             double fuelGauge = carFuelGauge.getGallons();
-            
-    		Odometer odometer = cars[i].getOdometer();
-    		int mileage = odometer.getOdometer();
+            Odometer odometer = cars[i].getOdometer();
+    		double mileage = odometer.getOdometer();
     		
-    		System.out.println("Owner: " + cars[i].getOwner());
-    		System.out.println("Model: " + cars[i].getModel());
-    		System.out.println("MPG: " + cars[i].getMpg());
-    		System.out.println("Gallons: " + mileage);
-    		System.out.println("Mileage: " + fuelGauge);
-    		System.out.println("");
-    	}
+    		System.out.printf("%-10s ", cars[i].getOwner());
+    		System.out.printf("%-20s ", cars[i].getModel());
+    		System.out.printf("%-15.2f ", cars[i].getMpg());
+    		System.out.printf("%-15.2f ", mileage);
+    		System.out.printf("%-15.2f \n", fuelGauge);
+        }
+        
+        System.out.println("-------------------------------------------------------------------------");
+        System.out.println("");
     }
+
+
 
     // Returns true if all the cars are out of gas. This requires examining the
     // fuel level of each car in the array. If all cars have “Empty” fuel level
@@ -124,25 +132,33 @@ public class MillspaughOwenAssignment11 {
 		double gasRequired = 0.0;
 		final double distanceNeeded = 25.0;
 		double fuelCheck = 0.0;
+		double fuel = 0.0;
+		int outOfGasIndex = 0;
+		 
 		
-		while(checkFuelLevels(cars) != true) { //Uses the checkFuelLevels method to check if the cars are empty
+		System.out.println("Hold on tight! ");
+		System.out.println("Starting simulation...");
+		System.out.println("");
+		while(!checkFuelLevels(cars)) { //Uses the checkFuelLevels method to check if the cars are empty
 			
 			for(int i = 0; i < cars.length; i++) { //Used to check and potentially run the cars for 25 miles
 				fuelGauge = cars[i].getFuelGauge();
-				double fuel = fuelGauge.getGallons();
+				fuel = fuelGauge.getGallons();
 				gasRequired = calcGallonsRequired(cars, i);
-				fuelCheck = distanceNeeded / gasRequired;
+				//fuelCheck = distanceNeeded / gasRequired;
 				
 				if(fuel > gasRequired) {
+					
 					decrementGallons(cars,i , gasRequired);
 					incrementMiles(cars, i);
 				}
 				else {
-					carsOutOfGas[i] = cars[i];
-					
+		                carsOutOfGas[outOfGasIndex] = cars[i];
+		                outOfGasIndex++;
 				}
+				checkFuelLevels(cars);
 			}
-			checkFuelLevels(cars);
+			System.out.println("Here we go again!");
 		}
 		System.out.println("");
 		System.out.println("------------------------------------------------------");
@@ -181,7 +197,7 @@ class Car {
     // Details for the car class go here
     private String owner;
     private String model;
-    private int mpg;
+    private double mpg;
     private FuelGauge fuelGauge;
     private Odometer odometer;
 
@@ -210,7 +226,7 @@ class Car {
         return model;
     }
 
-    public int getMpg() {
+    public double getMpg() {
         return mpg;
     }
 
