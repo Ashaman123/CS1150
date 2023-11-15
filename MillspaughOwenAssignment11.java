@@ -73,8 +73,6 @@ public class MillspaughOwenAssignment11 {
         System.out.println("");
     }
 
-
-
     // Returns true if all the cars are out of gas. This requires examining the
     // fuel level of each car in the array. If all cars have “Empty” fuel level
     // return true, otherwise return false
@@ -108,7 +106,6 @@ public class MillspaughOwenAssignment11 {
             return false;
         }
     }
-
 
     // Print the details for each car in the cars array to a file
     public static void writeCarDetailsToFile(Car[] cars) throws IOException {
@@ -181,7 +178,7 @@ public class MillspaughOwenAssignment11 {
             carsStillHaveGas = checkFuelLevels(cars);
         }
         allCarsIncluded(cars, carsOutOfGas);
-        //carsOutOfGas[outOfGasIndex] = cars[4];
+        
         // Print the cars that ran out of gas
         System.out.println("");
         System.out.println("------------------------------------------------------");
@@ -226,7 +223,6 @@ public class MillspaughOwenAssignment11 {
             }
         }
     }
-
 	
 	public static double calcGallonsRequired(Car[] cars, int i) {
 		final double distanceNeeded = 25.0;
