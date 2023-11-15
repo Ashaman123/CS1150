@@ -133,8 +133,9 @@ public class MillspaughOwenAssignment11 {
 	//Runs the simulation to check if cars have enough gas and if so, they should run the program
 	//decreasing the gallons required and increasing the odometer value by the amount required
 	//This runs until all cars are empty or 
-    public static void runSimulator(Car[] cars) {
-        Car[] carsOutOfGas = new Car[50]; // Use the length of the input array
+    @SuppressWarnings("unused")
+	public static void runSimulator(Car[] cars) {
+        Car[] carsOutOfGas = new Car[5]; // Use the length of the input array
         FuelGauge fuelGauge;
         Odometer odometer;
         double gasRequired = 0.0;
@@ -172,14 +173,15 @@ public class MillspaughOwenAssignment11 {
                              // If the car is not in the list, add it
                              if (carNotInList) {
                                  carsOutOfGas[outOfGasIndex] = cars[i];
+                                 outOfGasIndex++;
                              }
-                            outOfGasIndex++;
                         }
                     }
                 }          
             carsStillHaveGas = checkFuelLevels(cars);
         }
-
+        allCarsIncluded(cars, carsOutOfGas);
+        //carsOutOfGas[outOfGasIndex] = cars[4];
         // Print the cars that ran out of gas
         System.out.println("");
         System.out.println("------------------------------------------------------");
@@ -190,7 +192,6 @@ public class MillspaughOwenAssignment11 {
                 System.out.println("Ran out of gas: " + carsOutOfGas[i].getOwner());
             }
         }
-        System.out.println("");
 
         // Print the cars at the end of the simulation
         System.out.println("");
@@ -201,6 +202,30 @@ public class MillspaughOwenAssignment11 {
     }
 
 
+    public static void allCarsIncluded(Car[] cars, Car[] carsOutOfGas) {
+        for (int i = 0; i < cars.length; i++) {
+            String carOwner = cars[i].getOwner();
+            boolean ownerIncluded = false;
+
+            // Check if the owner is already in the carsOutOfGas array
+            for (Car car : carsOutOfGas) {
+                if (car != null && carOwner.equalsIgnoreCase(car.getOwner())) {
+                    ownerIncluded = true;
+                    break;
+                }
+            }
+
+            // If the owner is not included, add the car to the carsOutOfGas array
+            if (!ownerIncluded) {
+                for (int j = 0; j < carsOutOfGas.length; j++) {
+                    if (carsOutOfGas[j] == null) {
+                        carsOutOfGas[j] = cars[i];
+                        break;  // Break after adding the car
+                    }
+                }
+            }
+        }
+    }
 
 	
 	public static double calcGallonsRequired(Car[] cars, int i) {
