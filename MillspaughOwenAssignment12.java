@@ -3,9 +3,9 @@
  *  Class: CS1150 
  *  Due:  Nov 29, 2023
  *  Description: Assignment #12 
- *  This program demonstrates that I understand basic program structure by 
- *  printing a couple paragraphs on the console that tell the instructor what I’m  
- *  passionate about.  It also gives a little practice with arithmetic in Java.
+ *  Used to check and practice the use of polymorphism and the use of super and
+ *  sub classes with the use of an Animal super class and multiple subclasses
+ *  that are used for various different functions that set the subclasses apart. 
  */
 
 import java.io.File;
@@ -50,24 +50,21 @@ public class MillspaughOwenAssignment12 {
 						System.out.println("");
 						if (animals[i] instanceof Bear) {
 							System.out.println("Animal[" + i + "] is a Bear");
-					        System.out.print("Bear: ");
+					        
 					    } else if (animals[i] instanceof Elephant) {
 					    	System.out.println("Animal[" + i + "] is a Elephant");
-					        System.out.print("Elephant: ");
+					        
 					    } else if (animals[i] instanceof Monkey) {
 					    	System.out.println("Animal[" + i + "] is a Monkey");
-					        System.out.print("Monkey: ");
+					       
 					    } else if (animals[i] instanceof Sloth) {
 					    	System.out.println("Animal[" + i + "] is a Sloth");
-					        System.out.print("Sloth: ");
+					        
 					    } else {
 					        // Default case for the base class Animal
 					        System.out.print("Animal: ");
 					    }
-						System.out.print("Name: " + animals[i].getName().toString());
-						System.out.print(" | Weighs: " + animals[i].getWeight() + " lbs");
-						System.out.print(" | Sleeps: " + animals[i].getSleep() + " hours");
-						System.out.print(" | Location: " + animals[i].getLocation().toString() + " | ");
+						animals[i].print(animals);
 						System.out.println("");
 						animals[i].eat(animals, i);
 						animals[i].sleep(animals, i);
@@ -94,6 +91,8 @@ class Animal {
         this.location = location;
     }
 
+
+
 public String getName() {
 	return name;
 }
@@ -114,12 +113,18 @@ public String getLocation() {
 	return location;
 }
 
+public void print(Animal[] animals) {
+		System.out.printf("Animal | Name: %s | Weighs: %s lbs | Sleeps: %d hours | Location: %s ",getName(), getWeight(), getSleep(), getLocation());
+	}
+
 public void eat(Animal[] animals, int i) {
 	System.out.println("Animal is eating");
 }
+
 public void sleep(Animal[] animals, int i) {
 	System.out.println("Animal is sleeping - Do Not Disturb");
 }
+
 public void swim(Animal[] animals) {
 	System.out.println("Animal is swimming");
 }
@@ -143,7 +148,11 @@ class Bear extends Animal{
 		@Override
 		public void swim(Animal[] animals) {
 			System.out.println("Bear is swimming");
-			} 
+			}
+		@Override
+		public void print(Animal[] animals) {
+			System.out.printf("Bear | Name: %s | Weighs: %s lbs | Sleeps: %d hours | Location: %s ",getName(), getWeight(), getSleep(), getLocation());
+		}
 
 	}
 
@@ -155,6 +164,10 @@ class Elephant extends Animal{
 	@Override
 	public void sleep(Animal[] animals, int i) {
 		System.out.println("Elephant is sleeping " + getSleep() + " hours");
+	}
+	@Override
+	public void print(Animal[] animals) {
+		System.out.printf("Elephant | Name: %s | Weighs: %s lbs | Sleeps: %d hours | Location: %s ",getName(), getWeight(), getSleep(), getLocation());
 	}
 }
 
@@ -171,12 +184,21 @@ class Monkey extends Animal{
 	public void swim(Animal[] animals) {
 		System.out.println("Monkey is swimming");
 		} 
+	@Override
+	public void print(Animal[] animals) {
+		System.out.printf("Monkey | Name: %s | Weighs: %s lbs | Sleeps: %d hours | Location: %s ",getName(), getWeight(), getSleep(), getLocation());
+	}
 }
 
 class Sloth extends Animal{
 	public Sloth (String name, String food, int weight, int sleep, String location) {
 		super(name, food, weight, sleep, location);
 	}	
+	
+	@Override
+	public void print(Animal[] animals) {
+		System.out.printf("Sloth | Name: %s | Weighs: %s lbs | Sleeps: %d hours | Location: %s ",getName(), getWeight(), getSleep(), getLocation());
+	}
 }
 
 
